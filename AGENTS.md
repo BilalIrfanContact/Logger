@@ -17,6 +17,18 @@ Read these files before making changes that affect their area:
 
 When sources disagree, stop and resolve the disagreement before coding. Ask the user when the documents do not provide an answer. Do not silently invent behavior.
 
+## Branching strategy
+
+- Keep `main` stable and deployable. Do not implement directly on `main`.
+- Create one short-lived branch per ticket from the latest `main`.
+- Name branches after the change, without ticket numbers. Use prefixes such as `feat/`, `fix/`, `docs/`, or `chore/`.
+- Use names such as `feat/production-foundation`, `fix/session-cookie`, or `docs/export-spec`.
+- Keep each branch limited to one ticket. If the ticket is too large, stop and split it before expanding the branch scope.
+- Open one pull request per ticket branch and merge it into `main` after the acceptance criteria and tests pass.
+- Delete the branch after it has been merged.
+- Do not create a long-lived `develop` or `staging` branch for V1.
+
+
 ## Testing
 
 Test user-visible behavior at the authenticated application boundary. The main flow is:
