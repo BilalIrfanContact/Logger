@@ -137,6 +137,12 @@ The product should feel like a personal journal, not a task manager. The user se
 ### Application boundaries
 
 - Build the application around a single authenticated journal workflow boundary. It owns user-facing journal actions and coordinates authentication, persistence, AI organization, retrieval, and export.
+- Build the web application with TypeScript, React, and the Next.js App Router. Use Next.js server-side code and Route Handlers for the application boundary and normal backend requests. V1 does not have a separate Express or NestJS API server.
+- Use Tailwind CSS for the interface. Use Vitest for focused tests and Playwright for the authenticated end-to-end flow.
+- Use Supabase Auth, Postgres, and Row Level Security. Use `@supabase/ssr` for secure cookie-based sessions.
+- Deploy the Next.js application to Vercel. Run the Node.js background worker on Railway. Keep long-running AI and scheduler work in the worker instead of request handlers.
+- Use the OpenAI JavaScript SDK and Responses API with the fixed server-side `gpt-5.6-luna` model. Use Zod for application input validation and JSON Schema for the AI output contract.
+- Store organization job state in Supabase tables. Do not add Redis or another queue service in V1.
 - Keep provider-specific details behind adapters for Supabase, the OpenAI Responses API, Vercel runtime concerns, and Railway worker execution.
 - Keep raw notes, AI reviews, and saved journal entries as separate concepts and records. No AI path may write directly to saved entries.
 - Use the domain terms in `CONTEXT.md` as the canonical vocabulary: user, journal day, raw note, AI review, review suggestion, journal entry, project, Uncategorized entry, calendar grid, journal card, and project history.
@@ -229,7 +235,7 @@ The product should feel like a personal journal, not a task manager. The user se
 ### Deployment and operations
 
 - Use a production-only managed setup for V1.
-- Vercel hosts the web app and normal backend requests. Supabase hosts authentication and the database. Railway runs the background worker.
+- Vercel hosts the Next.js web app and normal Route Handler backend requests. Supabase hosts authentication and the database. Railway runs the Node.js background worker.
 - Add a separate staging environment only when the project needs it.
 - Trigger production deployments manually. Keep the previous working deployment available for rollback.
 - Use versioned database migrations. Test migrations before production and take a backup before applying them.
@@ -255,6 +261,7 @@ The product should feel like a personal journal, not a task manager. The user se
 - Verify export content and exclusions, JSON versioning, ISO UTC timestamps, stable project references, Uncategorized nulls, filename, immediate download, and omission of empty or deleted data.
 - Verify operations behavior with migration checks, rollback readiness, backup creation and restore, privacy-safe logs, alert conditions, scheduler catch-up, and secret handling.
 - No automated test suite exists in the repository yet, so there is no prior test pattern to preserve. Establish the authenticated end-to-end flow as the first testing foundation, then add focused contract tests only where the provider boundaries require them.
+- Use Playwright for the authenticated end-to-end flow and Vitest for focused application and provider-adapter tests. Keep both suites deterministic with the fixtures and test doubles described above.
 
 ## Out of Scope
 
