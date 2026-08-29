@@ -1,5 +1,7 @@
 # Logger glossary
 
+The root [CONTEXT.md](../CONTEXT.md) defines Logger's canonical domain language. This glossary keeps the expanded working definitions and supporting terms in one place.
+
 ## Journal day
 
 The user's single journal for one calendar date. It is the parent record for that day's raw notes, AI reviews, and saved entries.
