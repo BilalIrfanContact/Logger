@@ -61,3 +61,11 @@ The saved entries for one project, grouped by journal date with the newest date 
 ## Uncategorized history
 
 The history view for saved entries that do not belong to a project.
+
+## Journal export
+
+A complete JSON copy of the user's durable journal data, including populated journal days, raw notes, saved entries, and projects. Temporary AI reviews and technical processing records are not part of an export.
+
+## Export version
+
+The number in a journal export that identifies its JSON structure. V1 uses export version `1`.
