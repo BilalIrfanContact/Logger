@@ -36,6 +36,14 @@ A user-owned canonical entity that groups journal entries across days.
 
 The local date shown to the user, such as `2026-08-29`. It is separate from an exact UTC timestamp.
 
+## Locale
+
+The user's saved regional display preference, initially detected from the browser or device. It controls date and time formatting and which day starts the calendar week. It is not a physical-location tracker.
+
+## Timezone snapshot
+
+The IANA timezone saved on a journal day, such as `Asia/Karachi`. It determines that day's local date and midnight boundary even if the user later changes their account timezone.
+
 ## Calendar grid
 
 The monthly view used to browse journal days. A marked date has raw notes or saved entries. Today is selected by default, empty past dates can be opened, and future dates are disabled.
