@@ -35,3 +35,19 @@ A user-owned canonical entity that groups journal entries across days.
 ## Calendar date
 
 The local date shown to the user, such as `2026-08-29`. It is separate from an exact UTC timestamp.
+
+## Calendar grid
+
+The monthly view used to browse journal days. A marked date has raw notes or saved entries. Today is selected by default, empty past dates can be opened, and future dates are disabled.
+
+## Journal card
+
+The large overlay used to open a journal day while keeping the calendar visible behind it.
+
+## Project history
+
+The saved entries for one project, grouped by journal date with the newest date first. Archived projects keep their history, and uncategorized entries have their own history view.
+
+## Uncategorized history
+
+The history view for saved entries that do not belong to a project.
