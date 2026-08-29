@@ -4,9 +4,9 @@ Research snapshot: 2026-08-29. Sources are official OpenAI documentation only.
 
 ## Decision
 
-Use `gpt-5.6-terra` through the Responses API with Structured Outputs and a strict JSON Schema. Start with `reasoning.effort: "low"`; test `"medium"` later if representative journal examples show missed categories or poor grouping.
+Use `gpt-5.6-luna` through the Responses API with Structured Outputs and a strict JSON Schema. Start with `reasoning.effort: "low"`; test `"medium"` later if representative journal examples show missed categories or poor grouping.
 
-Terra fits Logger better than the flagship model because this is a bounded text-organization task, not open-ended professional analysis. It costs less than Sol while keeping the same 1.05M-token context window, 128K maximum output, and Structured Outputs support. This quality-versus-cost judgment is an inference from Logger's low-frequency, text-only workload and OpenAI's model descriptions. [Model catalog](https://developers.openai.com/api/docs/models), [model guidance](https://developers.openai.com/api/docs/guides/latest-model), [GPT-5.6 Terra](https://developers.openai.com/api/docs/models/gpt-5.6-terra)
+Luna is suitable for Logger because this is a bounded text-organization task, not open-ended professional analysis. The user has prior experience with Luna and judged its capabilities sufficient for Logger. It is also the lower-cost GPT-5.6 option. This quality judgment comes from the user's experience and product judgment; the cost comparison comes from OpenAI's model descriptions. [Model catalog](https://developers.openai.com/api/docs/models), [model guidance](https://developers.openai.com/api/docs/guides/latest-model), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna)
 
 ## Current model comparison
 
@@ -25,7 +25,7 @@ Prices are standard text-token prices. Actual limits depend on the project's usa
 - Limit one raw organization input to 20,000 characters. This is an app limit, not the model's context limit, and should cover a normal full-day journal while preventing unexpectedly large requests.
 - Set `max_output_tokens` to 4,096. A journal organization result should be much smaller than this in normal use; the limit prevents an accidental or malformed response from producing unbounded output.
 - Allow at most 10 organization jobs per user in a rolling 24-hour period, with one active job per journal revision. Reject or defer additional jobs while preserving the raw notes.
-- Keep `gpt-5.6-terra` as a server-side V1 setting. Do not expose model selection to users or add a second model path until evaluation data shows a need.
+- Keep `gpt-5.6-luna` as a server-side V1 setting. Do not expose model selection to users or add a second model path until evaluation data shows a need.
 - Give each OpenAI request a 30-second network timeout. Give each organization job a five-minute overall deadline, then mark it failed and keep the raw notes available.
 - Allow two retries after the initial attempt, with exponential backoff and jitter. Retry only transient failures. Do not retry validation failures, refusals, authentication errors, or other permanent 4xx responses.
 
@@ -71,7 +71,7 @@ Do not use Batch API for the V1 user path. It is 50% cheaper and has separate ra
 ## V1 summary
 
 ```text
-model: gpt-5.6-terra
+model: gpt-5.6-luna
 api: Responses API
 reasoning.effort: low
 output: strict Structured Outputs JSON Schema
