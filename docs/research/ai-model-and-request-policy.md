@@ -20,6 +20,15 @@ Prices are standard text-token prices. Actual limits depend on the project's usa
 
 ## Request policy
 
+### Application limits
+
+- Limit one raw organization input to 20,000 characters. This is an app limit, not the model's context limit, and should cover a normal full-day journal while preventing unexpectedly large requests.
+- Set `max_output_tokens` to 4,096. A journal organization result should be much smaller than this in normal use; the limit prevents an accidental or malformed response from producing unbounded output.
+- Allow at most 10 organization jobs per user in a rolling 24-hour period, with one active job per journal revision. Reject or defer additional jobs while preserving the raw notes.
+- Keep `gpt-5.6-terra` as a server-side V1 setting. Do not expose model selection to users or add a second model path until evaluation data shows a need.
+- Give each OpenAI request a 30-second network timeout. Give each organization job a five-minute overall deadline, then mark it failed and keep the raw notes available.
+- Allow two retries after the initial attempt, with exponential backoff and jitter. Retry only transient failures. Do not retry validation failures, refusals, authentication errors, or other permanent 4xx responses.
+
 ### One job for each organization event
 
 - When the user submits late notes for an earlier day, create one organization job immediately.
@@ -71,4 +80,3 @@ execution: durable worker with background=true and polling
 write policy: AI creates pending suggestions; user approval writes journal entries
 failure policy: preserve raw notes, show the job as failed, allow retry
 ```
-
