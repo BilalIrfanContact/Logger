@@ -27,6 +27,18 @@ describe("application health", () => {
     });
   });
 
+  it("reports a configured but unreachable provider as degraded", async () => {
+    await expect(checkHealth({ configured: true }, async () => false)).resolves.toEqual({
+      status: "degraded",
+      configured: true,
+      supabase: {
+        configured: true,
+        reachable: false,
+        error: "dependency_unreachable",
+      },
+    });
+  });
+
   it("hides provider error details when the dependency is unavailable", async () => {
     const report = await checkHealth({ configured: true }, async () => {
       throw new Error("secret provider response");

@@ -1,7 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
 import { getSupabaseConfig } from "@/lib/supabase/config";
+import { probeSupabaseAuth } from "@/lib/supabase/probe";
 import { checkHealth } from "@/platform/health/check";
 
 export const dynamic = "force-dynamic";
@@ -15,15 +15,7 @@ export async function GET() {
         return false;
       }
 
-      const supabase = createClient(config.url, config.anonKey, {
-        auth: {
-          autoRefreshToken: false,
-          detectSessionInUrl: false,
-          persistSession: false,
-        },
-      });
-      const { error } = await supabase.auth.getSession();
-      return !error;
+      return probeSupabaseAuth(config.url, config.anonKey);
     },
   );
 

@@ -11,6 +11,7 @@ This ticket establishes the application and deployment boundary. Run the followi
 5. Set valid Supabase URL and anon-key values, restart the dev server, and confirm the health endpoint returns `200` when Supabase Auth is reachable.
 6. Run `npm run worker -- --once` and confirm the worker starts and exits without journal or AI behavior.
 7. Run `npm run typecheck`, `npm test`, and `npm run test:e2e`.
+8. Against a disposable Supabase project, run `supabase db push`, confirm `public.organization_jobs` exists, and verify an authenticated user can only access rows with their own `user_id`.
 
 The automated browser test uses the local Next.js server and does not call a real Supabase project when configuration is absent.
 

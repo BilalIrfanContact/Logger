@@ -26,6 +26,17 @@ npm run worker -- --once
 
 The worker stays a placeholder in this ticket. `--once` starts it and exits, which is useful for a local smoke check. Railway runs `npm run worker` as the long-lived service command.
 
+## Supabase migrations
+
+The repository keeps database changes in `supabase/migrations`. Before the first production deploy, link the Supabase CLI to the target project and apply the versioned migrations after taking a database backup:
+
+```bash
+supabase link --project-ref <project-ref>
+supabase db push
+```
+
+The foundation migration creates durable organization-job state, protects rows with ownership RLS, and prevents more than one active job for the same user revision. Journal-day and review tables arrive in later tickets.
+
 ## Manual production deployment
 
 Vercel hosts the Next.js web app and its Route Handlers. Create or link the Vercel project, add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in the Vercel environment settings, then deploy manually:
