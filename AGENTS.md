@@ -17,6 +17,23 @@ Read these files before making changes that affect their area:
 
 When sources disagree, stop and resolve the disagreement before coding. Ask the user when the documents do not provide an answer. Do not silently invent behavior.
 
+## Coding practices
+
+Follow these principles:
+
+- Build deep modules with small public APIs that hide real complexity.
+- Minimize coupling; every responsibility should have a clear owner.
+- Organize by domain and capability, not generic utils, services, or helpers.
+- Keep business logic independent from frameworks, databases, and vendor SDKs.
+- Push side effects to the edges; keep core logic deterministic and easy to test.
+- Never leak module internals across boundaries.
+- Reject premature abstractions, unnecessary interfaces, factories, and layers.
+- Choose simple, explicit designs over clever or overly generic ones.
+- Before major features, define the owning module and smallest useful public API.
+- If a request creates weak boundaries or tight coupling, propose a cleaner design before coding.
+
+The goal is a codebase that is simple to use, easy to change, easy to test, and does not require callers to understand internal complexity.
+
 ## Branching strategy
 
 - Keep `main` stable and deployable. Do not implement directly on `main`.
@@ -63,3 +80,13 @@ Before declaring a ticket complete:
 - `git diff --check` passes.
 - No secrets or unrelated files are included.
 - The ticket, commit, and pull request describe what changed and what was verified.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
