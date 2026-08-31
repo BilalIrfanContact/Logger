@@ -2,7 +2,7 @@
 
 ## Project
 
-Logger is a private, multi-user work journal for developers. Users write raw notes during the day. AI organizes those notes into an editable review. Only the user's approved review becomes saved journal entries.
+Kept is a private, multi-user work journal for developers. Users write raw notes during the day. AI organizes those notes into an editable review. Only the user's approved review becomes saved journal entries.
 
 V1 is a web-only product. Mobile support is not part of the current design or implementation.
 
@@ -11,7 +11,7 @@ V1 is a web-only product. Mobile support is not part of the current design or im
 Read these files before making changes that affect their area:
 
 - `CONTEXT.md` for domain vocabulary and boundaries.
-- `docs/specs/logger-v1-implementation-spec.md` for the complete V1 behavior.
+- `docs/specs/kept-v1-implementation-spec.md` for the complete V1 behavior.
 - `docs/decisions/` for accepted architectural decisions.
 - GitHub issues for the current implementation ticket, acceptance criteria, and blockers.
 

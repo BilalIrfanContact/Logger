@@ -1,6 +1,6 @@
-# Logger domain
+# Kept domain
 
-Logger is a personal work journal for developers. It turns the user's unstructured account of a day into editable, project-based journal entries while keeping the user in control of what gets saved.
+Kept is a personal work journal for developers. It turns the user's unstructured account of a day into editable, project-based journal entries while keeping the user in control of what gets saved.
 
 ## Core journal language
 
@@ -60,7 +60,7 @@ _Avoid_: New page; the card is an overlay over the current browsing view.
 
 **Project history**:
 The saved entries for one project, grouped by journal date with the newest date first. Archived projects keep their history.
-_Avoid_: Project report; Logger records work history, not project-management metrics.
+_Avoid_: Project report; Kept records work history, not project-management metrics.
 
 **Uncategorized history**:
 The retrieval view for saved entries that do not belong to a project.
@@ -80,4 +80,4 @@ _Avoid_: Uncategorized project; uncategorized is a view, not a project record.
 - Raw notes are the user's source material. Journal entries are the saved result. They are different things.
 - AI proposes organization. The user decides what becomes saved journal data.
 - A journal day is based on the user's local date, while exact event times remain timestamps.
-- Logger records what happened. It does not track task status, time spent, priorities, estimates, productivity scores, or collaboration.
+- Kept records what happened. It does not track task status, time spent, priorities, estimates, productivity scores, or collaboration.

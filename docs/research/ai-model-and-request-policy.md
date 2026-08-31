@@ -6,7 +6,7 @@ Research snapshot: 2026-08-29. Sources are official OpenAI documentation only.
 
 Use `gpt-5.6-luna` through the Responses API with Structured Outputs and a strict JSON Schema. Start with `reasoning.effort: "low"`; test `"medium"` later if representative journal examples show missed categories or poor grouping.
 
-Luna is suitable for Logger because this is a bounded text-organization task, not open-ended professional analysis. The user has prior experience with Luna and judged its capabilities sufficient for Logger. It is also the lower-cost GPT-5.6 option. This quality judgment comes from the user's experience and product judgment; the cost comparison comes from OpenAI's model descriptions. [Model catalog](https://developers.openai.com/api/docs/models), [model guidance](https://developers.openai.com/api/docs/guides/latest-model), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna)
+Luna is suitable for Kept because this is a bounded text-organization task, not open-ended professional analysis. The user has prior experience with Luna and judged its capabilities sufficient for Kept. It is also the lower-cost GPT-5.6 option. This quality judgment comes from the user's experience and product judgment; the cost comparison comes from OpenAI's model descriptions. [Model catalog](https://developers.openai.com/api/docs/models), [model guidance](https://developers.openai.com/api/docs/guides/latest-model), [GPT-5.6 Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna)
 
 ## Current model comparison
 
@@ -35,7 +35,7 @@ Prices are standard text-token prices. Actual limits depend on the project's usa
 - At the user's local midnight, create one job for the day's unorganized notes.
 - Send only the relevant raw notes, their stable IDs, the journal date, and any existing saved entries needed to avoid duplicates. Treat saved entries as read-only context.
 - Store the raw notes unchanged. The model returns suggestions only. It must not directly update saved journal entries.
-- Save the model result as a pending review. The user approves the suggestions before Logger adds them to the journal.
+- Save the model result as a pending review. The user approves the suggestions before Kept adds them to the journal.
 
 This keeps the one-journal-per-day rule and makes a failed or poor AI run recoverable.
 
@@ -51,22 +51,22 @@ Do not ask the prompt to describe the JSON shape. Put the contract in the JSON S
 
 ### Background processing and timeouts
 
-Use `background: true` for the Responses request. The web request should enqueue the Logger job and return its status instead of waiting for model completion. A worker should persist the OpenAI response ID, poll while the response is `queued` or `in_progress`, retrieve the terminal response, validate it, and mark the job ready for user review. OpenAI documents background mode specifically for long-running work and shows polling the response object until it reaches a terminal state. [Background mode](https://developers.openai.com/api/docs/guides/background)
+Use `background: true` for the Responses request. The web request should enqueue the Kept job and return its status instead of waiting for model completion. A worker should persist the OpenAI response ID, poll while the response is `queued` or `in_progress`, retrieve the terminal response, validate it, and mark the job ready for user review. OpenAI documents background mode specifically for long-running work and shows polling the response object until it reaches a terminal state. [Background mode](https://developers.openai.com/api/docs/guides/background)
 
-The worker should copy the final parsed result into Logger's database. OpenAI's background documentation says response data is stored temporarily to support polling, so the OpenAI response should not be treated as Logger's permanent record. [Background mode](https://developers.openai.com/api/docs/guides/background)
+The worker should copy the final parsed result into Kept's database. OpenAI's background documentation says response data is stored temporarily to support polling, so the OpenAI response should not be treated as Kept's permanent record. [Background mode](https://developers.openai.com/api/docs/guides/background)
 
 ### Retries and rate limits
 
 - Retry only transient failures such as connection errors, timeouts, HTTP 408, 409, 429, and 5xx responses.
 - Use exponential backoff with random jitter, and cap application-level attempts so a stuck job cannot loop forever.
-- Keep one Logger job ID and one active attempt per journal version. A retry must not create a second set of saved entries.
+- Keep one Kept job ID and one active attempt per journal version. A retry must not create a second set of saved entries.
 - Bound worker concurrency and record request IDs, status, attempts, and final error type. Do not log journal text or model output.
 
-OpenAI recommends exponential backoff with jitter for rate-limit errors and notes that unsuccessful requests still count toward per-minute limits. Logger's expected traffic is far below the listed Tier 1 limits, but a midnight fan-out across many users could still create a burst because limits are shared at the project or organization level. [Rate limits](https://developers.openai.com/api/docs/guides/rate-limits), [error codes](https://developers.openai.com/api/docs/guides/error-codes)
+OpenAI recommends exponential backoff with jitter for rate-limit errors and notes that unsuccessful requests still count toward per-minute limits. Kept's expected traffic is far below the listed Tier 1 limits, but a midnight fan-out across many users could still create a burst because limits are shared at the project or organization level. [Rate limits](https://developers.openai.com/api/docs/guides/rate-limits), [error codes](https://developers.openai.com/api/docs/guides/error-codes)
 
 ### Batch API
 
-Do not use Batch API for the V1 user path. It is 50% cheaper and has separate rate-limit capacity, but completion is allowed to take up to 24 hours. That does not fit immediate late-addition processing and gives Logger less predictable morning availability after midnight. Reconsider it only if Logger later processes many independent journals and can tolerate that delay. [Batch API](https://developers.openai.com/api/docs/guides/batch)
+Do not use Batch API for the V1 user path. It is 50% cheaper and has separate rate-limit capacity, but completion is allowed to take up to 24 hours. That does not fit immediate late-addition processing and gives Kept less predictable morning availability after midnight. Reconsider it only if Kept later processes many independent journals and can tolerate that delay. [Batch API](https://developers.openai.com/api/docs/guides/batch)
 
 ## V1 summary
 

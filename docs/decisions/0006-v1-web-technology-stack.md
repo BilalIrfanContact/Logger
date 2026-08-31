@@ -1,9 +1,9 @@
 # V1 web technology stack
 
 - Status: Accepted
-- Scope: Logger V1
+- Scope: Kept V1
 
-Logger V1 is a web-only application. Build it with TypeScript, React, and the Next.js App Router. Next.js server-side code and Route Handlers form the application boundary for normal backend requests, so V1 does not need a separate Express or NestJS API server. Use Tailwind CSS for the interface.
+Kept V1 is a web-only application. Build it with TypeScript, React, and the Next.js App Router. Next.js server-side code and Route Handlers form the application boundary for normal backend requests, so V1 does not need a separate Express or NestJS API server. Use Tailwind CSS for the interface.
 
 Use Supabase Auth, Postgres, and Row Level Security for accounts and persistence, with `@supabase/ssr` for secure cookie-based sessions. Vercel hosts the Next.js application and its normal backend requests. Railway runs the Node.js background worker for AI organization and scheduled work. Store job state in Supabase tables and do not add Redis in V1.
 

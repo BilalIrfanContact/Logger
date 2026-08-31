@@ -3,7 +3,7 @@
 - Status: Accepted
 - Scope: Wayfinder ticket 5, `Define calendar and project-history retrieval behavior`
 
-Logger's V1 retrieval experience uses a monthly calendar grid and project history, with lightweight navigation so the journal remains the primary product.
+Kept's V1 retrieval experience uses a monthly calendar grid and project history, with lightweight navigation so the journal remains the primary product.
 
 ## Calendar
 

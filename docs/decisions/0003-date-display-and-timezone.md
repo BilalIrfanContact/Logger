@@ -3,7 +3,7 @@
 - Status: Accepted
 - Scope: Wayfinder ticket 13, `Define V1 date display and timezone behavior`
 
-Logger detects the browser or device locale and timezone when the account is set up, then saves them as account preferences. These values control display and journal-day boundaries, but they do not claim to identify the user's physical location.
+Kept detects the browser or device locale and timezone when the account is set up, then saves them as account preferences. These values control display and journal-day boundaries, but they do not claim to identify the user's physical location.
 
 ## Display rules
 
