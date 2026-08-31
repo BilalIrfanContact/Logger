@@ -13,3 +13,12 @@ This ticket establishes the application and deployment boundary. Run the followi
 7. Run `npm run typecheck`, `npm test`, and `npm run test:e2e`.
 
 The automated browser test uses the local Next.js server and does not call a real Supabase project when configuration is absent.
+
+## Foundation landing page UI
+
+1. Start the web app with `npm run dev` and open <http://localhost:3000>.
+2. Confirm the page uses the warm monochrome layout with a split hero and a Foundation status panel.
+3. Confirm the Foundation status panel links to `/api/health` and the link opens the JSON health response.
+4. Resize below 768px and confirm the hero stacks into one column without horizontal scrolling.
+5. Check both light and dark system appearances. Confirm text, borders, and the green status accent remain readable.
+6. Enable `prefers-reduced-motion` in browser accessibility settings and reload. Confirm content appears without the entry movement.

@@ -1,19 +1,44 @@
+import { LandingReveal } from "./landing-reveal";
+
 export default function HomePage() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center gap-8 px-6 py-16">
-      <div className="space-y-4">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Logger</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-6xl">
-          Your work, in your words.
-        </h1>
-        <p className="max-w-xl text-lg leading-8 text-slate-300">
-          A private work journal for developers. The application foundation is ready for the
-          authenticated journal experience.
-        </p>
-      </div>
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 text-sm text-slate-300">
-        <p className="font-medium text-white">Foundation status</p>
-        <p className="mt-2">The web application is running. Check <code>/api/health</code> for service readiness.</p>
+    <main className="site-shell">
+      <div className="page-frame">
+        <header className="site-header" aria-label="Logger">
+          <a className="wordmark" href="/" aria-label="Logger home">
+            LOGGER
+          </a>
+          <span className="header-note">Private by default</span>
+        </header>
+
+        <section className="hero-grid" aria-labelledby="page-title">
+          <LandingReveal className="hero-copy">
+            <p className="eyebrow">A work journal for developers</p>
+            <h1 id="page-title">Your work, in your words.</h1>
+            <p className="hero-lede">
+              Write raw notes, shape a review, and keep only what you approve.
+            </p>
+          </LandingReveal>
+
+          <LandingReveal className="status-panel" delay={0.12}>
+            <div className="status-panel-heading">
+              <p className="panel-label">Foundation status</p>
+              <span className="status-mark" aria-label="Application is running" />
+            </div>
+            <p className="status-title">The web application is running.</p>
+            <p className="status-copy">
+              Service readiness is available at <code>/api/health</code>.
+            </p>
+            <a className="status-link" href="/api/health">
+              Open health check <span aria-hidden="true">↗</span>
+            </a>
+          </LandingReveal>
+        </section>
+
+        <footer className="site-footer">
+          <span>Journal infrastructure</span>
+          <span>Web foundation</span>
+        </footer>
       </div>
     </main>
   );
