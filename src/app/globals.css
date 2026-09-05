@@ -91,6 +91,329 @@ a {
   color: var(--faint);
 }
 
+.landing-nav,
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.landing-nav a,
+.app-nav a,
+.text-button {
+  color: var(--muted);
+  font: inherit;
+  text-decoration: none;
+}
+
+.landing-nav a:hover,
+.app-nav a:hover,
+.text-button:hover {
+  color: var(--ink);
+}
+
+.nav-cta {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink) !important;
+  padding: 8px 12px;
+}
+
+.auth-page,
+.app-page {
+  min-height: 100dvh;
+  padding: 24px;
+}
+
+.auth-frame,
+.app-frame {
+  max-width: 1100px;
+  min-height: calc(100dvh - 48px);
+  margin: 0 auto;
+}
+
+.auth-header,
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  color: var(--muted);
+  font-family: "SF Mono", "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-form {
+  width: min(100%, 440px);
+  margin: clamp(48px, 10vh, 112px) auto 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: clamp(24px, 5vw, 48px);
+}
+
+.auth-form h1,
+.account-heading h1,
+.app-empty-state h1 {
+  max-width: 11ch;
+  margin: 18px 0 14px;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  line-height: 0.98;
+}
+
+.auth-copy,
+.settings-copy,
+.app-empty-state p,
+.danger-zone p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-family: "SF Mono", "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--canvas);
+  color: var(--ink);
+  font: 16px/1.4 inherit;
+  letter-spacing: normal;
+  padding: 11px 12px;
+  text-transform: none;
+}
+
+.field input:focus-visible,
+.button:focus-visible,
+.text-button:focus-visible,
+.landing-nav a:focus-visible,
+.app-nav a:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+
+.button {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  font: 12px/1.4 "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.03em;
+  padding: 12px 14px;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.button-primary {
+  margin-top: 24px;
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+.button-secondary {
+  border-color: var(--line);
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.button-danger {
+  background: #9b332d;
+  color: #fff;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 28px 0 14px;
+  color: var(--faint);
+  font: 10px "SF Mono", "JetBrains Mono", monospace;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  content: "";
+}
+
+.oauth-buttons {
+  display: grid;
+  gap: 8px;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.auth-links a:hover {
+  color: var(--ink);
+}
+
+.form-message {
+  margin: 18px 0 0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.form-error {
+  background: #f8e8e5;
+  color: #8d2f29;
+}
+
+.form-success {
+  background: var(--accent-surface);
+  color: var(--accent-ink);
+}
+
+.auth-notice {
+  width: min(100%, 440px);
+  margin: 40px auto -72px;
+}
+
+.auth-footer {
+  margin: 24px 0;
+  color: var(--faint);
+  font: 11px "SF Mono", "JetBrains Mono", monospace;
+  text-align: center;
+}
+
+.app-frame {
+  max-width: 1240px;
+}
+
+.app-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  color: var(--faint);
+  font: 11px "SF Mono", "JetBrains Mono", monospace;
+}
+
+.text-button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.app-empty-state {
+  max-width: 720px;
+  padding: clamp(80px, 16vh, 180px) 8px;
+}
+
+.app-empty-state h1 {
+  max-width: 9ch;
+}
+
+.account-page {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(300px, 1fr);
+  gap: 64px;
+  padding: clamp(56px, 10vh, 112px) clamp(8px, 4vw, 56px);
+}
+
+.account-heading h1 {
+  max-width: 8ch;
+}
+
+.settings-form,
+.danger-zone {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.settings-form h2,
+.danger-zone h2 {
+  margin: 12px 0 0;
+  font-size: 1.4rem;
+}
+
+.danger-zone {
+  grid-column: 2;
+  border-color: #cfa5a1;
+}
+
+.danger-zone .button {
+  margin-top: 24px;
+}
+
+@media (max-width: 767px) {
+  .auth-page,
+  .app-page {
+    padding: 16px;
+  }
+
+  .auth-frame,
+  .app-frame {
+    min-height: calc(100dvh - 32px);
+  }
+
+  .auth-header,
+  .app-header,
+  .app-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .landing-nav,
+  .app-nav {
+    flex-wrap: wrap;
+  }
+
+  .auth-form {
+    margin-top: 40px;
+  }
+
+  .auth-notice {
+    margin: 32px auto -24px;
+  }
+
+  .auth-links {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .account-page {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 56px 0;
+  }
+
+  .danger-zone {
+    grid-column: auto;
+  }
+}
+
 .hero-grid {
   display: grid;
   flex: 1;
