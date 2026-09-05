@@ -5,7 +5,7 @@
 
 ## Context
 
-Logger has one journal for each user and calendar date. Users add raw notes during the day. AI organizes those notes at local midnight or immediately when the user adds notes to an older day. AI output stays in review until the user approves it.
+Kept has one journal for each user and calendar date. Users add raw notes during the day. AI organizes those notes at local midnight or immediately when the user adds notes to an older day. AI output stays in review until the user approves it.
 
 ## Final V1 model
 
@@ -39,7 +39,7 @@ Entries are edited in place. V1 does not expose version history. New entries app
 
 ## Data rules
 
-- All Logger records use UUIDs. Every record carries the Supabase user ID for ownership checks.
+- All Kept records use UUIDs. Every record carries the Supabase user ID for ownership checks.
 - Exact event times use UTC. User-facing grouping uses the journal's stored local date and timezone.
 - AI never writes directly to journal entries. Saving a review creates or updates entries only after user approval.
 - Deleting a journal day permanently deletes its raw notes, organization jobs and reviews, and journal entries. It does not delete project records.

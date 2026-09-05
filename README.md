@@ -1,6 +1,6 @@
-# Logger
+# Kept
 
-Logger is a private work journal for developers. This repository currently contains the deployable V1 foundation. Authentication, journal persistence, and AI organization arrive in later tickets.
+Kept is a private work journal for developers. This repository currently contains the deployable V1 foundation. Authentication, journal persistence, and AI organization arrive in later tickets.
 
 ## Local development
 

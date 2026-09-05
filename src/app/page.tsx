@@ -4,9 +4,9 @@ export default function HomePage() {
   return (
     <main className="site-shell">
       <div className="page-frame">
-        <header className="site-header" aria-label="Logger">
-          <a className="wordmark" href="/" aria-label="Logger home">
-            LOGGER
+        <header className="site-header" aria-label="Kept">
+          <a className="wordmark" href="/" aria-label="Kept home">
+            KEPT
           </a>
           <span className="header-note">Private by default</span>
         </header>

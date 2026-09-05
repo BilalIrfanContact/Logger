@@ -17,7 +17,7 @@ V1 provides a complete export of the user's durable journal data. It does not pr
 
 ## User interaction
 
-The export downloads immediately as a file named like `logger-export-2026-08-29.json`. V1 does not offer date or project selection; the export always contains the complete journal.
+The export downloads immediately as a file named like `kept-export-2026-08-29.json`. V1 does not offer date or project selection; the export always contains the complete journal.
 
 ## Consequences
 

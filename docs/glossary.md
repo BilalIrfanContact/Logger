@@ -1,6 +1,6 @@
-# Logger glossary
+# Kept glossary
 
-The root [CONTEXT.md](../CONTEXT.md) defines Logger's canonical domain language. This glossary keeps the expanded working definitions and supporting terms in one place.
+The root [CONTEXT.md](../CONTEXT.md) defines Kept's canonical domain language. This glossary keeps the expanded working definitions and supporting terms in one place.
 
 ## Journal day
 

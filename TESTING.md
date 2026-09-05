@@ -6,7 +6,7 @@ This ticket establishes the application and deployment boundary. Run the followi
 
 1. Run `npm ci` and copy `.env.example` to `.env.local`.
 2. Start the web app with `npm run dev`.
-3. Open <http://localhost:3000> and confirm the Logger foundation page loads.
+3. Open <http://localhost:3000> and confirm the Kept foundation page loads.
 4. Open <http://localhost:3000/api/health>. With empty or placeholder Supabase values, confirm it returns `503` and does not display a key or provider response.
 5. Set valid Supabase URL and anon-key values, restart the dev server, and confirm the health endpoint returns `200` when Supabase Auth is reachable.
 6. Run `npm run worker -- --once` and confirm the worker starts and exits without journal or AI behavior.
@@ -14,6 +14,13 @@ This ticket establishes the application and deployment boundary. Run the followi
 8. Against a disposable Supabase project, run `supabase db push`, confirm `public.organization_jobs` exists, and verify an authenticated user can only access rows with their own `user_id`.
 
 The automated browser test uses the local Next.js server and does not call a real Supabase project when configuration is absent.
+
+## Kept branding
+
+1. Start the web app with `npm run dev` and open <http://localhost:3000>.
+2. Confirm the browser title is `Kept`.
+3. Confirm the header announces `Kept`, the visible wordmark reads `KEPT`, and the home link is named `Kept home` to assistive technology.
+4. Search the tracked repository files outside `TESTING.md` for `Logger` (for example, `git grep -n -i Logger -- ':!TESTING.md'`). Confirm the only matches are the explicit history note, legacy spec-path stub, and preserved GitHub repository links.
 
 ## Foundation landing page UI
 
