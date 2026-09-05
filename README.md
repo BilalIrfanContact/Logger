@@ -1,6 +1,6 @@
 # Kept
 
-Kept is a private work journal for developers. This repository currently contains the deployable V1 foundation and private Supabase-authenticated account shell. Journal persistence and AI organization arrive in later tickets.
+Kept is a private work journal for developers. This repository contains the deployable V1 foundation, private Supabase-authenticated account shell, journal capture, and manual saved-entry/project workflow. AI organization and retrieval features arrive in later tickets.
 
 ## Local development
 
@@ -37,7 +37,7 @@ supabase link --project-ref <project-ref>
 supabase db push
 ```
 
-The migrations create the private account profile boundary and durable organization-job state. Both use ownership RLS; records tied to `auth.users` are removed when an account is deleted. Journal-day and review tables arrive in later tickets.
+The migrations create the private account profile, journal-day/raw-note, organization-job, and manual entry/project boundaries. They use ownership RLS; records tied to `auth.users` are removed when an account is deleted. AI review tables arrive in later tickets.
 
 ## Manual production deployment
 

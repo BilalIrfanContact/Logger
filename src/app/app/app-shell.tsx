@@ -15,6 +15,7 @@ export function AppShell({
           <Link className="wordmark" href="/app" aria-label="Kept journal home">KEPT</Link>
           <nav className="app-nav" aria-label="Account navigation">
             <Link href="/app">Journal</Link>
+            <Link href="/app/projects">Projects</Link>
             <Link href="/app/account">Account</Link>
             <form action={logoutAction}><button className="text-button" type="submit">Sign out</button></form>
           </nav>
