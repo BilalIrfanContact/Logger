@@ -3,8 +3,13 @@ import { getLocalCalendarDate, formatJournalDate } from "@/lib/journal/date";
 import { createJournalCapture } from "@/lib/journal/capture";
 import { getAccountPreferences } from "@/lib/supabase/account";
 import { getSupabaseJournalCapture } from "@/lib/supabase/journal";
+import { createJournalEntryManager } from "@/lib/journal/entries";
+import { getSupabaseJournalEntryRepository } from "@/lib/supabase/entries";
+import { createProjectManager } from "@/lib/journal/projects";
+import { getSupabaseProjectRepository } from "@/lib/supabase/projects";
 
 import { JournalDayCapture } from "./journal-day-capture";
+import { JournalDayEntries } from "./journal-day-entries";
 
 type JournalPageProps = {
   searchParams?: Promise<{ date?: string | string[] }>;
@@ -23,13 +28,17 @@ export default async function JournalShellPage({ searchParams }: JournalPageProp
 
   try {
     const journal = await capture.openJournalDay(user.id, requestedDate, preferences);
+    const [entries, projects] = await Promise.all([
+      createJournalEntryManager(await getSupabaseJournalEntryRepository()).listEntries(user.id, journal.day.id),
+      createProjectManager(await getSupabaseProjectRepository()).listProjects(user.id),
+    ]);
     return (
       <section className="journal-page" aria-labelledby="journal-title">
         <div className="journal-heading">
           <div>
             <p className="eyebrow">Raw notes · {journal.day.timezone}</p>
             <h1 id="journal-title">{formatJournalDate(journal.day.journalDate, preferences.locale)}</h1>
-            <p className="journal-copy">Capture what happened in your own words. Each note is saved as you write it.</p>
+            <p className="journal-copy">Capture what happened in your own words, then keep the parts worth remembering as saved entries.</p>
           </div>
           <form className="date-picker" method="get">
             <label className="field">
@@ -44,6 +53,14 @@ export default async function JournalShellPage({ searchParams }: JournalPageProp
           timezone={journal.day.timezone}
           locale={preferences.locale}
           notes={journal.notes}
+        />
+        <JournalDayEntries
+          date={journal.day.journalDate}
+          journalDayId={journal.day.id}
+          timezone={journal.day.timezone}
+          locale={preferences.locale}
+          entries={entries}
+          projects={projects}
         />
       </section>
     );

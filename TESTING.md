@@ -61,3 +61,19 @@ Against a disposable Supabase project with email confirmations enabled:
 8. Inspect the revision rows for the day. Confirm each note mutation advances the current revision, prior revision snapshots remain unchanged, and deleting a raw note does not alter any saved-entry rows.
 
 The focused Vitest coverage uses a deterministic clock and a controlled persistence boundary to cover date guards, per-user uniqueness, timezone snapshots, note identity, revision invalidation, ownership, and saved-entry preservation. It does not call a real AI provider or depend on midnight timing.
+
+## Manual saved entries and projects (#18)
+
+Against a disposable Supabase project with email confirmations enabled:
+
+1. Apply the migrations with `supabase db push`, start the app, register and verify a test account, then sign in and open `/app`.
+2. Open today or a past journal day and add a saved entry without adding or organizing a raw note. Confirm it appears in the saved-entry section and survives a reload.
+3. Create a project from `/app/projects`. Add another saved entry assigned to it, then edit the entry text and project. Confirm the entry ID and project relationship remain stable through edits.
+4. Leave an entry Uncategorized, then confirm its project selector shows `Uncategorized` and no project row is created for it.
+5. Add several entries and use Move up/Move down. Confirm the selected order survives a reload and newly created entries appear at the top before a manual reorder.
+6. Rename the project and confirm existing entries still show the renamed project. Archive it, confirm it remains available in the archived list, then restore it.
+7. Create or archive a duplicate-name project with different casing and repeated whitespace. Confirm active names cannot duplicate after normalization, and restoring an archived conflict is refused.
+8. Merge two projects after the explicit confirmation. Confirm all source entries now reference the target project and the source project is gone. Permanently delete the target by typing its exact name and confirm its related entries are removed.
+9. Create a second disposable account. Confirm it cannot list, edit, reorder, merge, archive, restore, or delete the first account's projects or journal entries through the protected UI or `/api` routes. Confirm raw notes and journal revision rows remain present and unchanged after saved-entry and project operations.
+
+The focused Vitest coverage uses controlled in-memory repository doubles at the use-case boundary. It verifies privacy, entry CRUD and deterministic reorder, Uncategorized assignment, confirmation guards, normalized project uniqueness, rename identity, archive/restore, merge relationships, and project-delete cascade behavior. It does not call Supabase or an AI provider.
