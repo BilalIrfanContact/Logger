@@ -30,3 +30,19 @@ The automated browser test uses the local Next.js server and does not call a rea
 4. Resize below 768px and confirm the hero stacks into one column without horizontal scrolling.
 5. Check both light and dark system appearances. Confirm text, borders, and the green status accent remain readable.
 6. Enable `prefers-reduced-motion` in browser accessibility settings and reload. Confirm content appears without the entry movement.
+
+## Private accounts and authenticated app shell (#16)
+
+Against a disposable Supabase project with email confirmations enabled and Google/GitHub providers configured:
+
+1. Set the public Supabase values, the server-only `SUPABASE_SERVICE_ROLE_KEY`, and the deployed origin in `.env.local`. Apply migrations with `supabase db push`.
+2. Open `/register`, create an account, and confirm that the app does not grant access before email verification. Follow the verification email and confirm it lands on `/app`.
+3. Sign out, sign back in with email/password, and confirm `/app` and `/app/account` are available. Confirm the account email, locale, and timezone appear in the shell.
+4. From `/login`, exercise the Google and GitHub buttons with the configured disposable OAuth applications. Confirm each returns through `/auth/callback` to the protected shell.
+5. Use `/forgot-password`, follow the reset email, set a new password, and confirm the old password no longer signs in.
+6. Confirm an unauthenticated browser is redirected from `/app` and `/app/account` to `/login`, and sign-out returns to the public landing page.
+7. Change locale and timezone on `/app/account`, reload, and confirm the saved values remain stable. Use an IANA timezone such as `Asia/Karachi`, not a UTC offset.
+8. Create two disposable users and verify each sees only its own profile. Attempting to read or update the other user's profile through Supabase should return no row or an authorization error under RLS.
+9. Type `DELETE` in the account deletion confirmation. Confirm the user is signed out, the profile and all rows with an `auth.users` cascade are gone, and the deleted credentials cannot sign in again.
+
+The focused Vitest coverage uses injected auth/deletion dependencies and local validation; it never calls Supabase Auth or an OAuth provider. With provider configuration absent, the browser smoke test still verifies the public landing page and safe degraded health response.

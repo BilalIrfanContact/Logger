@@ -8,7 +8,10 @@ export default function HomePage() {
           <a className="wordmark" href="/" aria-label="Kept home">
             KEPT
           </a>
-          <span className="header-note">Private by default</span>
+          <nav className="landing-nav" aria-label="Account navigation">
+            <a href="/login">Sign in</a>
+            <a className="nav-cta" href="/register">Create account</a>
+          </nav>
         </header>
 
         <section className="hero-grid" aria-labelledby="page-title">

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getSupabaseConfig } from "./config";
+import { getSupabaseAdminConfig, getSupabaseConfig } from "./config";
 
 describe("Supabase configuration", () => {
   it("reports missing configuration without exposing an incomplete value", () => {
@@ -33,6 +33,26 @@ describe("Supabase configuration", () => {
       isConfigured: false,
       url: null,
       anonKey: null,
+    });
+  });
+
+  it("keeps the service-role key separate from public readiness", () => {
+    expect(
+      getSupabaseAdminConfig({
+        NEXT_PUBLIC_SUPABASE_URL: " https://example.supabase.co ",
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: " anon-key ",
+        SUPABASE_SERVICE_ROLE_KEY: " service-role-key ",
+      }),
+    ).toEqual({
+      isConfigured: true,
+      url: "https://example.supabase.co",
+      serviceRoleKey: "service-role-key",
+    });
+
+    expect(getSupabaseAdminConfig({})).toEqual({
+      isConfigured: false,
+      url: null,
+      serviceRoleKey: null,
     });
   });
 });
