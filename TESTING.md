@@ -46,3 +46,18 @@ Against a disposable Supabase project with email confirmations enabled and Googl
 9. Type `DELETE` in the account deletion confirmation. Confirm the user is signed out, the profile and all rows with an `auth.users` cascade are gone, and the deleted credentials cannot sign in again.
 
 The focused Vitest coverage uses injected auth/deletion dependencies and local validation; it never calls Supabase Auth or an OAuth provider. With provider configuration absent, the browser smoke test still verifies the public landing page and safe degraded health response.
+
+## Journal days and raw notes (#17)
+
+Against a disposable Supabase project with email confirmations enabled:
+
+1. Apply the migrations with `supabase db push`, start the app, register and verify a test account, then sign in and open `/app`.
+2. Confirm today opens with the saved account timezone shown. Type a raw note and wait for the `Saved` status; reload and confirm the note remains.
+3. Add a second note and confirm both notes remain separate. Edit the first note, reload, and confirm it changed in place rather than appearing as a duplicate.
+4. Delete the second note and reload. Confirm it is gone while the first note is unchanged.
+5. Open yesterday with the date picker. Confirm an empty past journal day opens and can accept a late note. Try a future date and confirm the page refuses to open it.
+6. Change the account timezone, return to a previously created journal day, and confirm its displayed timezone and local note times still use the day's original timezone. Open a new day and confirm it uses the new account timezone.
+7. Create a second disposable account. Confirm it cannot see, edit, or delete the first account's journal days or raw notes. Verify the database contains one `journal_days` row per user/date and that raw-note IDs remain stable through edits.
+8. Inspect the revision rows for the day. Confirm each note mutation advances the current revision, prior revision snapshots remain unchanged, and deleting a raw note does not alter any saved-entry rows.
+
+The focused Vitest coverage uses a deterministic clock and a controlled persistence boundary to cover date guards, per-user uniqueness, timezone snapshots, note identity, revision invalidation, ownership, and saved-entry preservation. It does not call a real AI provider or depend on midnight timing.

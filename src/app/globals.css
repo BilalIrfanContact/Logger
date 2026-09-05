@@ -157,11 +157,113 @@ a {
 
 .auth-form h1,
 .account-heading h1,
-.app-empty-state h1 {
+.app-empty-state h1,
+.journal-heading h1 {
   max-width: 11ch;
   margin: 18px 0 14px;
   font-size: clamp(2.5rem, 5vw, 4.4rem);
   line-height: 0.98;
+}
+
+.journal-page {
+  padding: clamp(48px, 8vh, 96px) 0;
+}
+
+.journal-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  align-items: end;
+  gap: 48px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 40px;
+}
+
+.journal-heading h1 {
+  max-width: 12ch;
+  margin-bottom: 18px;
+}
+
+.journal-copy {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.date-picker {
+  display: grid;
+  gap: 18px;
+}
+
+.journal-capture {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  align-items: start;
+  gap: 48px;
+  padding-top: 40px;
+}
+
+.notes-list {
+  display: grid;
+  gap: 14px;
+}
+
+.raw-note,
+.new-note {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 18px;
+}
+
+.new-note {
+  position: sticky;
+  top: 24px;
+}
+
+.raw-note-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  color: var(--faint);
+  font-family: "SF Mono", "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.raw-note textarea,
+.new-note textarea {
+  display: block;
+  width: 100%;
+  resize: vertical;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 16px/1.55 inherit;
+  outline: 0;
+}
+
+.raw-note textarea:focus-visible,
+.new-note textarea:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 5px;
+}
+
+.note-delete {
+  margin-top: 12px;
+  padding: 0;
+  font-size: 10px;
+}
+
+.empty-notes {
+  margin: 0;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+  padding: 28px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .auth-copy,
@@ -407,6 +509,16 @@ a {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 56px 0;
+  }
+
+  .journal-heading,
+  .journal-capture {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .new-note {
+    position: static;
   }
 
   .danger-zone {
