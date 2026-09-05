@@ -1,6 +1,6 @@
 # Kept
 
-Kept is a private work journal for developers. This repository currently contains the deployable V1 foundation. Authentication, journal persistence, and AI organization arrive in later tickets.
+Kept is a private work journal for developers. This repository currently contains the deployable V1 foundation and private Supabase-authenticated account shell. Journal persistence and AI organization arrive in later tickets.
 
 ## Local development
 
@@ -26,6 +26,8 @@ npm run worker -- --once
 
 The worker stays a placeholder in this ticket. `--once` starts it and exits, which is useful for a local smoke check. Railway runs `npm run worker` as the long-lived service command.
 
+The authenticated shell uses Supabase email/password, verification, password reset, Google/GitHub OAuth entry points, and secure server-managed cookies. Set `SUPABASE_SERVICE_ROLE_KEY` only on the server to enable manual account deletion.
+
 ## Supabase migrations
 
 The repository keeps database changes in `supabase/migrations`. Before the first production deploy, link the Supabase CLI to the target project and apply the versioned migrations after taking a database backup:
@@ -35,7 +37,7 @@ supabase link --project-ref <project-ref>
 supabase db push
 ```
 
-The foundation migration creates durable organization-job state, protects rows with ownership RLS, and prevents more than one active job for the same user revision. Journal-day and review tables arrive in later tickets.
+The migrations create the private account profile boundary and durable organization-job state. Both use ownership RLS; records tied to `auth.users` are removed when an account is deleted. Journal-day and review tables arrive in later tickets.
 
 ## Manual production deployment
 
